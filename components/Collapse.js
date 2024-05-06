@@ -1,6 +1,7 @@
 /* globals $: false */
 import { nanoid } from 'nanoid'
 import { useRef, useState } from 'react'
+import styles from '../styles/components/Collapse.module.scss'
 
 const Collapse = ({ showLabel, hideLabel, onExpand, className, indent, children }) => {
   const [collapsed, setCollapsed] = useState(true)

@@ -6,7 +6,10 @@ import { useRouter } from 'next/router'
 import WebFieldContext from '../WebFieldContext'
 import SubmissionButton from './SubmissionButton'
 import Markdown from '../EditorComponents/Markdown'
-import ExpertiseSelector from '../ExpertiseSelector'
+// import ExpertiseSelector from '../ExpertiseSelector'
+// import ExpertiseSelectorv3 from '../ExpertiseSelectorv2'
+// import ExpertiseSelectorv3 from '../ExpertiseSelectorv3'
+import ExpertiseSelectorv4 from '../ExpertiseSelectorv4'
 import { prettyId } from '../../lib/utils'
 import { referrerLink, venueHomepageLink } from '../../lib/banner-links'
 
@@ -28,22 +31,26 @@ export default function ExpertiseConsole({ appContext }) {
       ? invitation.edge?.label?.param?.enum
       : invitation.reply?.content?.label?.['value-radio']
   const buttonText = options?.[0] || 'Exclude'
-  const defaultDescription = `Listed below are all the papers you have authored that exist in the OpenReview database.
+//   const defaultDescription = `Listed below are all the papers you have authored that exist in the OpenReview database.
 
-**By default, we consider all of these papers to formulate your expertise.
-Please click "${buttonText}" for papers that you ${
-    buttonText === 'Exclude' ? 'do NOT' : ''
-  } want to be used to represent your expertise.**
+// **By default, we consider all of these papers to formulate your expertise.
+// Please click "${buttonText}" for papers that you ${
+//     buttonText === 'Exclude' ? 'do NOT' : ''
+//   } want to be used to represent your expertise.**
 
-Your previously authored papers from selected conferences were automatically imported from [DBLP.org](https://dblp.org/).
-The keywords in these papers will be used to rank submissions for you during the bidding process, and to assign submissions to you during the review process.
-If there are DBLP papers missing, you can add them by going to your [OpenReview profile](/profile/edit) and clicking "Add DBLP Papers to Profile".
+// Your previously authored papers from selected conferences were automatically imported from [DBLP.org](https://dblp.org/).
+// The keywords in these papers will be used to rank submissions for you during the bidding process, and to assign submissions to you during the review process.
+// If there are DBLP papers missing, you can add them by going to your [OpenReview profile](/profile/edit) and clicking "Add DBLP Papers to Profile".
 
-Papers not automatically included as part of this import process can be uploaded with the **Upload** button below.
-Make sure that your email is part of the "authorids" field of the upload form, otherwise the paper will not appear in the list,
-though it will be included in the recommendations process. Only upload papers you are an author of.
+// Papers not automatically included as part of this import process can be uploaded with the **Upload** button below.
+// Make sure that your email is part of the "authorids" field of the upload form, otherwise the paper will not appear in the list,
+// though it will be included in the recommendations process. Only upload papers you are an author of.
 
-Please contact info@openreview.net with any questions or concerns about this interface, or about the expertise scoring process.`
+// Please contact info@openreview.net with any questions or concerns about this interface, or about the expertise scoring process.`
+const defaultDescription = `Use the Expertise Keyphrases on the left to explore what papers you would potentially be assigned for reviewing. The keyphrases are inferred from your authored papers and can be edited for correctness. 
+
+Your previously authored papers from selected conferences were automatically imported from DBLP.org. These papers will be used to rank submissions for you during the bidding process, and to assign submissions to you during the review process. Please contact info@openreview.net with any questions or concerns about this interface, or about the expertise scoring process.
+`
   const defaultUploadInvitationId = `${process.env.SUPER_USER}/Archive/-/Direct_Upload`
 
   useEffect(() => {
@@ -67,7 +74,7 @@ Please contact info@openreview.net with any questions or concerns about this int
         </div>
       </header>
 
-      <div id="invitation">
+      {/* <div id="invitation">
         <SubmissionButton
           invitationId={uploadInvitationId ?? defaultUploadInvitationId}
           apiVersion={2}
@@ -77,10 +84,10 @@ Please contact info@openreview.net with any questions or concerns about this int
           }}
           options={{ largeLabel: true }}
         />
-      </div>
+      </div> */}
 
       <div id="notes">
-        <ExpertiseSelector
+        <ExpertiseSelectorv4
           invitation={invitation}
           venueId={venueId}
           apiVersion={apiVersion}

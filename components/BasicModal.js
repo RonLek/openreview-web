@@ -12,6 +12,7 @@ export default function BasicModal({
   onPrimaryButtonClick,
   onClose,
   onOpen,
+  isOpen = false,
   options = {},
 }) {
   const modalRef = useRef(null)
@@ -32,6 +33,14 @@ export default function BasicModal({
       $(modalRef.current).off('hidden.bs.modal,show.bs.modal')
     }
   }, [modalRef])
+
+  useEffect(() => {
+    if (isOpen) {
+      $(modalRef.current).modal('show');
+    } else {
+      $(modalRef.current).modal('hide');
+    }
+  }, [isOpen]);
 
   return (
     <div id={id} className="modal fade" tabIndex="-1" role="dialog" ref={modalRef}>
